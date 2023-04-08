@@ -1,0 +1,252 @@
+$gray: rgba(0, 0, 0, 0.08);
+$black: #212121;
+$yellow: rgb(255, 250, 230);
+$font_family: Georgia, Simsun, serif;
+$border: #a0aec0 1px solid;
+$index_width: 300px;
+$article_width: 800px;
+
+$item_height: 30px;
+$exp_logo_width: 16px;
+$exp_logo_height: 12px;
+$line_padding_bottom: ($item_height - $exp_logo_height)/2;
+$line_width: 2px;
+
+@mixin flex_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.all {
+    $nav_height: 50px;
+
+    width: 100%;
+    height: 100%;
+
+    .nav {
+        height: $nav_height;
+        background-color: $yellow;
+    }
+
+    .body {
+        display: flex;
+        height: calc(100% - $nav_height);
+    }
+}
+
+.index {
+    width: $index_width;
+    height: 100%;
+    background-color: $gray;
+}
+
+.indexHeader {
+    $title_height: 50px;
+    $padding_top: 15px;
+    padding: $padding_top 15px 0 15px;
+    width: 100%;
+    height: 120px;
+    background-color: $black;
+
+    .indexSearch {
+        display: flex;
+        align-items: center;
+        // padding: 0 10px;
+        width: 100%;
+        height: calc(100% - $title_height);
+
+        .searchInput {
+            margin-right: 5px;
+        }
+    }
+}
+
+.contentIndex {
+    padding: 10px 0 5px 15px;
+    border-bottom: $border;
+
+    font: {
+        size: 18px;
+        family: $font_family;
+        weight: bold;
+    }
+
+    color: black;
+}
+
+.articleList {
+    margin: 5px 0 0 15px;
+    padding-right: 5px;
+
+    ul {
+        padding-left: 10px;
+
+        font: {
+            size: 16px;
+            family: $font_family;
+        }
+
+        cursor: pointer;
+
+        li {
+            &:focus ul {
+                display: block;
+            }
+
+            ul {
+                display: none;
+                padding-left: 10px;
+
+                font: {
+                    size: 15px;
+                    family: $font_family;
+                }
+            }
+        }
+    }
+}
+
+.articleBody {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: $article_width;
+    height: 100%;
+    // background-color: $yellow;
+
+    overflow-y: scroll;
+    scrollbar-color: rebeccapurple green;
+    scrollbar-width: thin;
+
+    .articleHeader {
+        width: 100%;
+        height: 50px;
+        border-bottom: $border;
+
+        .intro {
+            position: relative;
+            float: right;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-right: 50px;
+
+            font: {
+                size: 18px;
+                family: $font_family;
+                weight: bold;
+            }
+
+            color: black;
+        }
+    }
+
+    .article {
+        padding: 30px 50px 0 50px;
+
+        font: {
+            size: 16px;
+            family: $font_family;
+        }
+
+        ul {
+            list-style-position: inside;
+
+            & li ul {
+                padding-left: 2em;
+                list-style-position: inside;
+            }
+        }
+    }
+}
+
+.markdown {
+    // height: 100%;
+    padding: 30px 40px 30px 40px;
+    // background-color: pink;
+}
+
+.item {
+    display: flex;
+    padding-left: 10px;
+
+    .left {
+        width: $exp_logo_width;
+
+        .logo {
+            @include flex_center;
+            height: $exp_logo_height;
+            margin-top: ($item_height - $exp_logo_height)/2;
+        }
+
+        .line {
+            height: calc(100% - ($item_height - $exp_logo_height) / 2 - $exp_logo_height - $line_padding_bottom);
+            width: $line_width;
+            margin-left: ($exp_logo_width - $line_width)/2;
+            background-color: $gray;
+        }
+    }
+
+    .right {
+        width: calc(100% - 2px);
+
+        .itemBody {
+            display: grid;
+            grid-template-columns: 200px auto 100px;
+            height: $item_height;
+
+            .itemName {
+                display: flex;
+                align-items: center;
+                justify-content: left;
+
+                font: {
+                    size: 15px;
+                    family: $font_family;
+                }
+            }
+
+            .itemTimestamp {
+                display: flex;
+                align-items: center;
+                justify-content: right;
+                padding-right: 10px;
+
+                font: {
+                    size: 14px;
+                    family: $font_family;
+                }
+            }
+
+            .itemBtn {
+                display: flex;
+                align-items: center;
+                justify-content: right;
+
+                padding-right: 10px;
+                font-size: 18px;
+
+                div {
+                    section {
+                        display: none;
+                    }
+
+                    &:hover {
+                        > span {
+                            display: none;
+                        }
+
+                        > section {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
